@@ -1,0 +1,1612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device=width, initial-scale=1.0">
+    <title>海盐易购·莺歌海源</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* 全局颜色变量 */
+        :root {
+            --primary-blue: #1E3A8A;    /* 深蓝主色 */
+            --secondary-blue: #3B82F6;  /* 明亮辅助蓝 */
+            --accent-blue: #60A5FA;     /* 强调色 */
+            --light-bg: #EFF6FF;       /* 浅蓝背景 */
+            --dark-bg: #1E293B;        /* 深蓝背景 */
+            --text-light: #F8FAFC;     /* 浅色文本 */
+        }
+        /* 重置所有元素的默认边距和填充 */
+        body, h1, h2, h3, p, ul, li, button {
+            margin: 0;
+            padding: 0;
+        }
+        /* 设置页面主体的字体和背景样式 */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-image: linear-gradient(to bottom, var(--light-bg), #DBEAFE); /* 浅蓝渐变 */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            opacity: 0.9; /* 设置背景透明度为90% */
+            min-height: 100vh; /* 确保背景覆盖整个视口 */
+            margin: 0; /* 确保body没有默认边距 */
+        }
+        .main {
+            margin-left: 0;
+            margin-right: 0;
+        }
+        /* 设置页面头部的样式 */
+        .header {
+            background: rgba(30, 41, 59, 0.95); /* 深蓝半透明 */
+            backdrop-filter: blur(5px); /* 毛玻璃效果 */
+            color: var(--text-light);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative; /* 为海浪纹理添加定位 */
+        }
+        .header h1 {
+            font-size: 24px; /* 调整标题字体大小 */
+        }
+        .header::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(
+                90deg,
+                transparent 25%,
+                var(--accent-blue) 25%,
+                var(--accent-blue) 50%,
+                transparent 50%,
+                transparent 75%,
+                var(--secondary-blue) 75%
+            );
+            background-size: 40px 40px;
+        }
+        .marquee {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            box-sizing: border-box;
+        }
+        .marquee p {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 60s linear infinite; /* 将动画时间改为30秒 */
+        }
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+        .marquee p {
+            color: var(--accent-blue); /* 浅青文字 */
+            text-shadow: 0 2px 4px rgba(72,169,166,0.3);
+        }
+        /* 设置导航栏的样式 */
+        .nav {
+            background-color: var(--dark-bg);
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative; /* 为海浪纹理添加定位 */
+        }
+        .nav::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(
+                90deg,
+                transparent 25%,
+                var(--accent-blue) 25%,
+                var(--accent-blue) 50%,
+                transparent 50%,
+                transparent 75%,
+                var(--secondary-blue) 75%
+            );
+            background-size: 40px 40px;
+        }
+        /* 移除导航栏列表的默认样式 */
+        .nav ul {
+            list-style: none;
+        }
+        /* 设置导航栏列表项为内联块元素，并设置外边距 */
+        .nav li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+        /* 设置导航栏链接的样式 */
+        .nav a {
+            color: var(--accent-blue); /* 主色呼应 */
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        /* 设置导航栏链接在鼠标悬停时的背景颜色 */
+        .nav a:hover {
+            background: var(--secondary-blue); /* 深海松石绿 */
+        }
+        /* 设置页面主体内容的样式 */
+        .main {
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 增加阴影效果 */
+        }
+        /* 设置盐场部分的样式 */
+        .salt-field {
+            background-color: #f8f8f8;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        /* 设置英雄部分的样式 */
+        .hero {
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            padding: 60px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 设置产品部分的样式 */
+        .products {
+            padding: 30px;
+        }
+        /* 设置产品列表的样式，使用弹性布局并允许换行 */
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        /* 设置产品项的样式 */
+        .product-item {
+            margin: 20px;
+            text-align: center;
+            width: 220px;
+            background: linear-gradient(145deg, #fff, #E0F2FE); /* 微渐变背景 */
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(59, 130, 246, 0.1); /* 主色投影 */
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative; /* 添加相对定位 */
+            border: 1px solid #BFDBFE; /* 柔和边框 */
+        }
+        .product-item .details {
+            display: none; /* 隐藏详细信息 */
+        }
+        .product-item .toggle-details {
+            cursor: pointer;
+            color: var(--text-light); /* 调整为白色 */
+            text-decoration: underline;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .product-item .toggle-details:hover {
+            color: #ffcc00; /* 增加悬停效果 */
+        }
+        .product-item .toggle-details::before {
+            content: '🔍'; /* 添加图标 */
+            margin-right: 5px;
+        }
+        /* 设置产品项在鼠标悬停时的样式 */
+        .product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        /* 设置产品图片的样式，最大宽度为100%，并添加边框和圆角 */
+        .product-item img {
+            max-width: 100%;
+            border: 2px solid var(--primary-blue);
+            border-radius: 5px;
+        }
+        /* 设置产品标题的样式 */
+        .product-item h3 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        /* 设置产品描述的样式 */
+        .product-item p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        /* 设置产品价格的样式，字体加粗并设置颜色 */
+        .product-item .price {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--primary-blue); /* 主色呼应 */
+        }
+        /* 设置购买按钮的样式 */
+        .buy-btn {
+            background: var(--secondary-blue); /* 深海松石绿 */
+            color: var(--text-light);
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        /* 设置购买按钮在鼠标悬停时的样式 */
+        .buy-btn:hover {
+            background: var(--primary-blue); /* 深松石绿 */
+            transform: translateY(-2px);
+        }
+
+        /* 按钮按压效果 */
+        .buy-btn:active {
+            transform: scale(0.95) translateY(2px);
+        }
+        /* 设置加载更多按钮的样式 */
+        #load-more-btn {
+            background: var(--secondary-blue); /* 深海松石绿 */
+            color: var(--text-light);
+            border: 1px solid var(--primary-blue);
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 20px; /* 添加上边距 */
+            align-self: center; /* 将按钮对齐到中心 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 设置加载更多按钮在鼠标悬停时的样式 */
+        #load-more-btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        /* 设置页面底部的样式 */
+        .footer {
+            background: rgba(30, 41, 59, 0.95); /* 深蓝半透明 */
+            backdrop-filter: blur(5px); /* 毛玻璃效果 */
+            color: var(--text-light);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .footer::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(
+                90deg,
+                transparent 25%,
+                var(--accent-blue) 25%,
+                var(--accent-blue) 50%,
+                transparent 50%,
+                transparent 75%,
+                var(--secondary-blue) 75%
+            );
+            background-size: 40px 40px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .main {
+                padding: 20px;
+                margin: 10px;
+            }
+            .product-item {
+                width: 100%;
+                margin: 10px 0;
+            }
+            .hero {
+                padding: 30px;
+            }
+            .salt-field {
+                padding: 20px;
+            }
+            .nav ul {
+                padding: 0;
+            }
+            .nav li {
+                display: block;
+                margin: 5px 0;
+            }
+            .nav a {
+                padding: 10px;
+                display: block;
+            }
+        }
+       
+        /* 滚动动画 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out; /* 缩短动画时间 */
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* 汉堡菜单 */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 30px;
+        }
+        .hamburger div {
+            width: 100%;
+            height: 3px;
+            background-color: #fff;
+            transition: transform 0.4s, opacity 0.4s;
+        }
+        .hamburger.active div:nth-child(1) {
+            transform: translateY(12px) rotate(45deg);
+        }
+        .hamburger.active div:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active div:nth-child(3) {
+            transform: translateY(-12px) rotate(-45deg);
+        }
+        @media (max-width: 768px) {
+            .nav ul {
+                display: none;
+                flex-direction: column;
+                transition: max-height 0.5s ease-out;
+                overflow: hidden;
+                max-height: 0;
+            }
+            .nav ul.show {
+                display: flex;
+                max-height: 500px; /* 设置一个足够大的值以显示所有菜单项 */
+            }
+            .hamburger {
+                display: flex;
+            }
+        }
+        /* 合并重复的弹窗样式 */
+        .modal, #input-modal, #about-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7); /* 调整背景颜色和透明度 */
+        }
+        .modal-content, .about-content, .product-details-content {
+            background-color: #fff;
+            margin: 10% auto; /* 调整弹窗位置 */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-height: 80%; /* 确保弹窗不会超出页面 */
+            overflow-y: auto; /* 添加滚动条 */
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        /* 悬浮购物车球样式 */
+        .cart-float {
+            position: fixed;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            background-color: #007BFF;
+            color: #fff;
+            padding: 5px; /* 调整大小 */
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            z-index: 1001; /* 确保在最上层 */
+            width: 40px; /* 调整宽度 */
+            height: 40px; /* 调整高度 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px; /* 调整图标大小 */
+        }
+        .cart-float:hover {
+            background-color: #0056b3;
+            transform: translateY(-50%) scale(1.1); /* 悬浮放大 */
+        }
+        .cart-float::after {
+            content: attr(data-count); /* 显示购物车内的商品数量 */
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: none; /* 默认隐藏红点 */
+        }
+        .cart-float[data-count]:not([data-count="0"])::after {
+            display: block; /* 购物车有商品时显示红点 */
+        }
+        .cart-content {
+            display: none;
+            position: fixed;
+            top: 50%;
+            right: 50px;
+            transform: translateY(-50%);
+            background-color: #fff;
+            color: #000;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 1001; /* 确保在最上层 */
+        }
+        .cart-content h2 {
+            margin-bottom: 10px;
+        }
+        .cart-content ul {
+            list-style: none;
+            padding: 0;
+        }
+        .cart-content li {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cart-content .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .cart-content .close:hover,
+        .cart-content .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+        .cart-content .remove-btn {
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .cart-content .remove-btn:hover {
+            background-color: #cc0000;
+        }
+        .quantity-control {
+            display: flex;
+            align-items: center;
+        }
+        .quantity-control button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+        .quantity-control button:hover {
+            background-color: #0056b3;
+        }
+        .quantity-control input {
+            width: 40px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+        }
+        @media (max-width: 768px) {
+            .cart-float {
+                width: 30px; /* 调整宽度 */
+                height: 30px; /* 调整高度 */
+                font-size: 16px; /* 调整图标大小 */
+            }
+        }
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .search-bar input {
+            width: calc(100% - 100px); /* 调整宽度 */
+            padding: 8px; /* 调整填充 */
+            font-size: 14px; /* 调整字体大小 */
+            border-radius: 25px 0 0 25px; /* 添加弧度 */
+            border: 1px solid #007BFF;
+            outline: none;
+        }
+        .search-bar button {
+            padding: 8px 15px; /* 调整填充 */
+            font-size: 14px; /* 调整字体大小 */
+            border-radius: 0 25px 25px 0; /* 添加弧度 */
+            border: 1px solid #007BFF;
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .search-bar button:hover {
+            background-color: #0056b3;
+        }
+        .cart-content button {
+            float: right; /* 将结算按钮放在右侧 */
+        }
+        @media (max-width: 768px) {
+            .search-bar input {
+                width: calc(100% - 80px); /* 调整宽度 */
+                padding: 6px; /* 调整填充 */
+                font-size: 12px; /* 调整字体大小 */
+            }
+            .search-bar button {
+                padding: 6px 10px; /* 调整填充 */
+                font-size: 12px; /* 调整字体大小 */
+            }
+        }
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .salt-encyclopedia, .interactive-qa {
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+
+        .encyclopedia-content h3, .qa-content h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .encyclopedia-content p, .qa-content p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .qa-content input {
+            width: calc(100% - 100px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .qa-content button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .qa-content button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .qa-item {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #222;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+        }
+        .sticky-header.visible {
+            display: block;
+        }
+        .salt-encyclopedia img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+        .user-interaction {
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+        .user-interaction h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .user-interaction button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .user-interaction button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        .certificates {
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            text-align: center;
+        }
+        .certificates img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+        .certificates h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .product-details-content img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+        .review-modal-content {
+            display: none;
+        }
+        .lazy {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .lazy-loaded {
+            opacity: 1;
+        }
+        /* 合并弹窗样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(3px);
+            animation: modalFade 0.3s ease;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, var(--light-bg) 0%, #ffffff 100%);
+            margin: 10vh auto;
+            padding: 2rem;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+        }
+
+        /* 新增弹窗头部样式 */
+        .modal-header {
+            border-bottom: 2px solid var(--accent-blue);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .modal-header h2 {
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .modal-header h2::before {
+            content: '';
+            width: 8px;
+            height: 24px;
+            background: var(--secondary-blue);
+            border-radius: 4px;
+        }
+
+        /* 弹窗内容优化 */
+        .modal-body {
+            line-height: 1.8;
+            color: var(--dark-bg);
+        }
+
+        .modal-body p {
+            margin-bottom: 1.2rem;
+        }
+
+        /* 新增图标动画 */
+        .close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .close:hover {
+            transform: rotate(90deg);
+            color: var (--secondary-blue);
+        }
+
+        /* 盐文化弹窗特色样式 */
+        #about-modal .modal-content {
+            background: linear-gradient(135deg, #f8fafc 0%, #f0f9ff 100%);
+        }
+
+        .salt-culture-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .culture-card {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .culture-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .culture-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+        }
+
+        @keyframes modalFade {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .swiper-button-next, .swiper-button-prev {
+            color: var(--primary-blue);
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .swiper-button-next:hover, .swiper-button-prev:hover {
+            background: var(--secondary-blue);
+            transform: scale(1.1);
+        }
+        .swiper-button-next::after, .swiper-button-prev::after {
+            font-size: 20px;
+        }
+        .reserve-btn {
+            background: var(--secondary-blue); /* 深海松石绿 */
+            color: var (--text-light);
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .reserve-btn:hover {
+            background: var(--primary-blue); /* 深松石绿 */
+            transform: translateY(-2px);
+        }
+        .reserve-btn:active {
+            transform: scale(0.95) translateY(2px);
+        }
+    </style>
+</head>
+<body>
+        <!-- 通用弹窗 -->
+        <div id="home-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('home-modal')">&times;</span>
+                <div class="modal-header">
+                    <h2>精选好盐</h2>
+                </div>
+                <div class="modal-body">
+                    <p>欢迎来到莺歌海海盐产品电商平台，精选优质海盐产品，满足您的各种需求。</p>
+                    <p>我们的产品包括低钠老盐、盐花分阶调味瓶、盐雾冷萃咖啡条等，每款产品都经过精心挑选，确保品质卓越。</p>
+                    <p>立即选购，享受健康美味的海盐体验！</p>
+                </div>
+            </div>
+        </div>
+        <div id="products-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('products-modal')">&times;</span>
+                <div class="modal-header">
+                    <h2>特色产品体系</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="product-category">
+                        <h3>莺歌海盐·味觉潮汐</h3>
+                        <ul class="product-tag">
+                            <li>低钠老盐福袋 🧂</li>
+                            <li>盐田三味巧克力 🍫</li>
+                            <li>盐雾冷萃咖啡条 ☕</li>
+                            <li>老盐果茶 🍵</li>
+                            <li>盐焗食品 🍗</li>
+                            <li>盐烤坚果 🥜</li>
+                        </ul>
+                    </div>
+                    <div class="product-category">
+                        <h3>盐晶·海韵焕肤</h3>
+                        <ul class="product-tag">
+                            <li>海洋护齿牙膏 🦷</li>
+                            <li>盐田藻类生物面膜 🧖‍♀️</li>
+                            <li>海盐香薰 🕯️</li>
+                            <li>浴盐套装 🛁</li>
+                            <li>珊瑚礁修复防晒棒 🏖️</li>
+                            <li>盐田微气候睡眠眼罩 😴</li>
+                        </ul>
+                    </div>
+                    <div class="product-category">
+                        <h3>盐语·海风物语</h3>
+                        <ul class="product-tag">
+                            <li>盐晶工艺品 🎨</li>
+                            <li>生肖盐雕 🐉</li>
+                            <li>疍家渔歌盐风铃 🎐</li>
+                            <li>椰林盐烛台 🕯️</li>
+                            <li>黎锦智能盐灯 💡</li>
+                            <li>书签、明信片、笔记本 📚</li>
+                            <li>文化礼盒 🎁</li>
+                            <li>定制盐罐 🏺</li>
+                        </ul>
+                    </div>
+                    <div class="product-category">
+                        <h3>盐田·时光漫游</h3>
+                        <ul class="product-tag">
+                            <li>盐田观光 🌅</li>
+                            <li>制盐体验 🧂</li>
+                            <li>盐知识展览 🏛️</li>
+                            <li>盐田跳伞 🪂</li>
+                            <li>盐田热气球 🎈</li>
+                            <li>盐田婚礼 💒</li>
+                            <li>盐田自驾 🚗</li>
+                        </ul>
+                    </div>
+                    <div class="product-category">
+                        <h3>盐创·未来之海</h3>
+                        <ul class="product-tag">
+                            <li>控盐神器 🧂</li>
+                            <li>抗腐蚀盐合金工具 🛠️</li>
+                            <li>微型盐田培育箱 🌱</li>
+                            <li>气味重构调香台 🧴</li>
+                            <li>集装箱盐洞SPA舱 🧖‍♂️</li>
+                            <li>企业定制盐路系统 🏢</li>
+                            <li>AI生成个性化盐敷配方 🤖</li>
+                            <li>虚拟盐田产权卡 💳</li>
+                            <li>AR盐晶生成器 🕶️</li>
+                            <li>盐田智能养殖系统 🐟</li>
+                        </ul>
+                    </div>
+                    <div class="product-category">
+                        <h3>盐风·潮汐衣橱</h3>
+                        <ul class="product-tag">
+                            <li>盐结晶渐变帆布鞋 👟</li>
+                            <li>晒盐工机能马甲 🦺</li>
+                            <li>大地色“盐”影盘 🎨</li>
+                            <li>盐晶矿物质T恤 👕</li>
+                        </ul>
+                    </div>
+                    <div class="product-category">
+                        <h3>盐疗·海韵养生</h3>
+                        <ul class="product-tag">
+                            <li>低钠盐 🧂</li>
+                            <li>多维富锶盐钙片 💊</li>
+                            <li>海盐漱口水 🦷</li>
+                            <li>海盐盐丸 💊</li>
+                        </ul>
+                    </div>
+                    <div class="product-category">
+                        <h3>盐趣·手作时光</h3>
+                        <ul class="product-tag">
+                            <li>DIY儿童礼盒 🎁</li>
+                            <li>手编传统盐篓 🧺</li>
+                            <li>飘花盐 🌸</li>
+                            <li>老盐伴手礼 🎁</li>
+                        </ul>
+                    </div>
+                    <div class="product-category">
+                        <h3>盐生·自然共生</h3>
+                        <ul class="product-tag">
+                            <li>盐田菌丝包装盒 📦</li>
+                            <li>珊瑚礁修复防晒棒 🏖️</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="about-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('about-modal')">&times;</span>
+                <div class="modal-header">
+                    <h2>盐文化探索</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="salt-culture-grid">
+                        <div class="culture-card">
+                            <img src="https://www.helloimg.com/i/2025/02/14/67aed835395f7.jpg" alt="盐田历史">
+                            <h3>千年盐史</h3>
+                            <p>岁月沉淀的传奇 | 始于唐朝的浪漫</p>
+                        </div>
+                        <div class="culture-card">
+                            <img src="https://www.helloimg.com/i/2025/02/14/67aed834d3cd2.jpg" alt="制盐工艺">
+                            <h3>古法新传</h3>
+                            <p>结合传统日晒法与现代结晶技术 | 保留天然矿物质</p>
+                        </div>
+                        <div class="culture-card">
+                            <img src="https://www.helloimg.com/i/2025/02/14/67aed834d43af.jpg" alt="盐艺文化">
+                            <h3>盐艺之美</h3>
+                            <p>指尖上的艺术 | 生活中的珍藏</p>
+                        </div>
+                        <div class="culture-card">
+                            <img src="https://www.helloimg.com/i/2025/02/14/67aed834cac57.jpg" alt="健康应用">
+                            <h3>盐雕文创</h3>
+                            <p>传承千年盐韵，雕琢时光之美 | 盐田里的艺术，生活中的珍藏</p>
+                        </div>
+                    </div>
+                    <div class="culture-timeline">
+                        <!-- 时间轴组件可以后续添加 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div id="shop-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('shop-modal')">&times;</span>
+                <div class="modal-header">
+                    <h2>在线咨询</h2>
+                </div>
+                <div class="modal-body">
+                    <p>如果您有任何问题，请随时联系我们的客服。</p>
+                    <p>客服热线：19350158725</p>
+                    <p>在线客服：点击<a href="#">这里</a>与客服沟通</p>
+                    <p>客服在线时间：9:00-21:00</p>
+                </div>
+            </div>
+        </div>
+    <div id="contact-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('contact-modal')">&times;</span>
+            <div class="modal-header">
+                <h2>联系我们</h2>
+            </div>
+            <div class="modal-body">
+                <p>如果您有任何问题或建议，请随时联系我们。</p>
+                <p>地址：海南省乐东黎族自治县莺歌海镇盐文化馆</p>
+                <p>电话：19350158725</p>
+                <p>邮箱：452229648@yinggehai.com</p>
+            </div>
+        </div>
+    </div>
+    <!-- 页面头部 -->
+    <header class="header">
+        <!-- 电商平台标题 -->
+        <h1>海盐易购·莺歌海源</h1>
+        <!-- 动态标语 -->
+        <div class="marquee">
+            <p>源自北纬18°的天然馈赠，让每一餐都充满海的纯净。|  精选海盐，低钠健康，守护您和家人的每一顿饭。| 四阶控盐神器，精准调味，烹饪不再烦恼，生活更有滋味。| 海盐冷萃咖啡棒，海洋风味与咖啡的完美融合，开启您的独特味蕾之旅。| 海洋护齿牙膏，天然海盐成分，温和护齿，守护全家口腔健康。| 莺歌海盐，每一粒都蕴含着大海的精华，为您的生活增添一份自然与健康。| 千年盐场，古法传承，现代工艺，只为给您带来最优质的海盐产品。| 从海洋到餐桌，莺歌海盐，让健康与美味同行。| 天然海盐，富含矿物质，助力健康生活，莺歌海盐伴您左右。| 探索海盐的奥秘，了解盐文化，选择莺歌海盐，开启健康生活新篇章。| 莺歌海盐，不仅是一种调味品，更是一种健康的生活方式。</p>
+        </div>
+    </header>
+
+    <!-- 固定标题 -->
+    <div class="sticky-header">
+        <h1>海盐易购·莺歌海源</h1>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav class="nav">
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <ul>
+            <li><a href="#" onclick="showModal('home-modal')"><i class="fas fa-star"></i> 精选好盐</a></li>
+            <li><a href="#" onclick="showModal('products-modal')"><i class="fas fa-th-list"></i> 特色产品体系</a></li>
+            <li><a href="#" onclick="showModal('about-modal')"><i class="fas fa-info-circle"></i> 盐文化</a></li>
+            <li><a href="#" onclick="showModal('contact-modal')"><i class="fas fa-envelope"></i> 联系我们</a></li>
+            <li><a href="#" onclick="showModal('shop-modal')"><i class="fas fa-comments"></i> 在线咨询</a></li>
+        </ul>
+    </nav>
+
+    <!-- 购物车弹窗 -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('cart-modal')">&times;</span>
+            <h2>购物车</h2>
+            <div id="cart-items"></div>
+            <button onclick="checkout()"><i class="fas fa-credit-card"></i> 结算</button>
+        </div>
+    </div>
+
+    <!-- 购物车悬浮球 -->
+    <div class="cart-float" id="cart-float" onclick="toggleCartContent()">
+        🛒
+    </div>
+    <div class="cart-content" id="cart-content">
+        <span class="close" onclick="toggleCartContent()">&times;</span>
+        <h2>购物车</h2>
+        <ul id="cart-items-list"></ul>
+        <button onclick="checkout()"><i class="fas fa-credit-card"></i> 结算</button>
+    </div>
+
+    <!-- 搜索栏 -->
+    <div class="search-bar">
+        <input type="text" id="search-input" placeholder="搜索产品...">
+        <button onclick="searchProducts()"><i class="fas fa-search"></i> 搜索</button>
+    </div>
+
+    <!-- 页面主体内容 -->
+    <main class="main">
+        <!-- 盐场部分 -->
+        <section class="salt-field fade-in">
+            <h2>莺歌海盐场</h2>
+            <p>莺歌海盐场是中国著名的海盐生产基地，拥有得天独厚的自然条件和悠久的历史。</p>
+        </section>
+
+        <!-- 英雄部分 -->
+        <section class="hero fade-in">
+            <h2>欢迎来到莺歌海海盐产品电商平台</h2>
+            <p>这里有各种优质的海盐产品，欢迎选购！</p>
+        </section>
+
+        <!-- 产品部分 -->
+        <section class="products fade-in">
+            <h2>海盐产品</h2>
+            <div class="product-list" id="product-list">  
+                <div class="product-item">
+                    <img src="https://www.helloimg.com/i/2025/02/14/67aed6c5bb6b1.jpg" alt="低钠老盐福袋">
+                    <h3>古法低钠老盐 | 20年窖藏，三高人群的安心之选</h3>
+                    <p class="price">¥19.9</p>
+                    <p class="toggle-details" onclick="toggleDetails(this)">查看详情</p>
+                    <button class="buy-btn"><i class="fas fa-cart-plus"></i> 添加至购物车</button>
+                </div>
+                <div class="product-item">
+                    <img src="https://www.helloimg.com/i/2025/02/14/67aed6c8098a4.jpg" alt="盐花分阶调味瓶">
+                    <h3>四阶控盐神器 | 精准掌控咸鲜层次，调出生活好滋味</h3>
+                    <p class="price">¥15.9</p>
+                    <p class="toggle-details" onclick="toggleDetails(this)">查看详情</p>
+                    <button class="buy-btn"><i class="fas fa-cart-plus"></i> 添加至购物车</button>
+                </div>
+            </div>
+            <!-- 加载更多按钮 -->
+            <button id="load-more-btn"><i class="fas fa-sync-alt"></i> 加载更多</button>
+        </section>
+
+        <section class="products fade-in">
+            <h2>旅游产品</h2>
+            <div class="product-list" id="product-list">  
+                <div class="product-item">
+                    <img src="https://www.helloimg.com/i/2025/02/14/67aed6cba9343.jpg" alt="低钠老盐福袋">
+                    <h3>盐田观光 | 漫步盐田，触晶莹海盐，赏无垠盐池，品海风咸香</h3>
+                    <p class="price">¥49.9</p>
+                    <button class="reserve-btn"><i class="fas fa-calendar-alt"></i> 预约</button>
+                </div>
+                <div class="product-item">
+                    <img src="https://www.helloimg.com/i/2025/02/14/67aed6c294002.jpg" alt="盐花分阶调味瓶">
+                    <h3>制盐体验 | 从海水到盐粒，亲手解锁古老制盐奥秘，收获满满成就感。</h3>
+                    <p class="price">¥39.9</p>
+                    <button class="reserve-btn"><i class="fas fa-calendar-alt"></i> 预约</button>
+                </div>
+                <div class="product-item">
+                    <img src="https://www.helloimg.com/i/2025/02/14/67aed6c282a16.jpg" alt="盐花分阶调味瓶">
+                    <h3>盐知识展览 | 穿越盐的历史长河，从起源到发展，一站式尽览。</h3>
+                    <p class="price">¥39.9</p>
+                    <button class="reserve-btn"><i class="fas fa-calendar-alt"></i> 预约</button>
+                </div>
+                <div class="product-item">
+                    <img src="https://www.helloimg.com/i/2025/02/14/67aed6c4e1ddc.jpg" alt="盐花分阶调味瓶">
+                    <h3>盐田跳伞 | 高空极速下落，邂逅盐田梦幻景致，挑战心跳极限 。</h3>
+                    <p class="price">¥599.9</p>
+                    <button class="reserve-btn"><i class="fas fa-calendar-alt"></i> 预约</button>
+                </div>
+            </div>
+
+        <!-- 盐知识百科板块 -->
+        <section class="salt-encyclopedia fade-in">
+            <h2>盐知识百科</h2>
+            <div class="encyclopedia-content">
+                <h3>海盐的介绍</h3>
+                <p>海盐是通过露天盐田日晒的缓慢蒸发方式，使结晶作用发生在盐水表面，结出脆弱的角锥形中空薄片。入口带着矿物质和海水咸鲜味的感觉，回味中还有一丝甘甜。</p>
+                <h3>海盐的种类</h3>
+                <p>海盐有多种类型，包括粗海盐、精制海盐、加碘海盐、无碘海盐、海精盐，雪花盐等。</p>
+                <h3>海盐的营养成分</h3>
+                <p>海盐富含矿物质和微量元素，如钾、钙、镁、锌、铁、锶等，对人体健康有益。</p>
+                <h3>海盐的健康功效</h3>
+                <p>适量摄入海盐有助于维持人体电解质平衡，维持神经肌肉的正常功能，促进骨骼健康、参与酶的活性调节等。</p>
+                <h3>海盐的用途</h3>
+                <p>海盐适用于烹饪调味、腌制食品、热敷泡澡等。</p>   
+            </div>
+        </section>
+
+        <!-- 互动问答环节 -->
+        <section class="interactive-qa fade-in">
+            <h2>互动问答</h2>
+            <div class="qa-content">
+                <h3>提出您的问题</h3>
+                <input type="text" id="question-input" placeholder="请输入您的问题">
+                <button onclick="submitQuestion()"><i class="fas fa-paper-plane"></i> 提交</button>
+                <div id="qa-list">
+                    <!-- 问答列表 -->
+                </div>
+            </div>
+        </section>
+
+
+    <!-- 页面底部 -->
+    <footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>联系我们</h3>
+            <p>地址：海南省乐东黎族自治县莺歌海镇盐文化馆</p>
+            <p>电话：19350158725</p>
+            <p>邮箱：452229648@yinggehai.com</p>
+        </div>
+        <div class="footer-section">
+            <h3>关注我们</h3>
+            <p>
+                <a href="#"><img src="https://www.helloimg.com/i/2025/02/14/67aed7bf7f7e0.jpg" alt="QQ" style="width: 24px; height: 24px; margin-right: 10px;"></a>
+                <a href="#"><img src="https://www.helloimg.com/i/2025/02/14/67aed7bf75533.jpg" alt="微信" style="width: 24px; height: 24px; margin-right: 10px;"></a>
+                <a href="#"><img src="https://www.helloimg.com/i/2025/02/14/67aed7bf8af0a.jpg" alt="抖音" style="width: 24px; height: 24px; margin-right: 10px;"></a>
+                <a href="#"><img src="https://www.helloimg.com/i/2025/02/14/67aed7bf97bab.jpg" alt="微博" style="width: 24px; height: 24px;"></a>
+            </p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 高"盐"值团队. 版权所有.</p>
+        <p><a href="#">合规查询入口</a></p>
+    </div>
+</footer>
+
+    <!-- 加载更多产品的功能 -->
+    <script>
+
+        // 滚动动画
+        window.addEventListener('scroll', function() {
+            document.querySelectorAll('.fade-in').forEach(function(element) {
+                if (element.getBoundingClientRect().top < window.innerHeight) {
+                    element.classList.add('visible');
+                }
+            });
+        });
+
+        // 显示或隐藏固定标题和导航栏
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            const stickyHeader = document.querySelector('.sticky-header');
+            const nav = document.querySelector('.nav');
+            if (window.scrollY > header.offsetHeight) {
+                stickyHeader.classList.add('visible');
+                nav.classList.add('sticky');
+            } else {
+                stickyHeader.classList.remove('visible');
+                nav.classList.remove('sticky');
+            }
+        });
+
+        // 汉堡菜单
+        function toggleMenu() {
+            const navUl = document.querySelector('.nav ul');
+            const hamburger = document.querySelector('.hamburger');
+            navUl.classList.toggle('show');
+            hamburger.classList.toggle('active');
+        }
+
+        // 弹窗显示时锁定背景滚动
+        function showModal(modalId) {
+            document.body.style.overflow = 'hidden';
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        // 弹窗关闭时恢复滚动
+        function closeModal(modalId) {
+            document.body.style.overflow = 'auto';
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // ESC键关闭功能
+        document.addEventListener('keydown', (e) => {
+            if(e.key === 'Escape') {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                });
+            }
+        });
+
+        // 优化弹窗关闭方式
+        document.querySelectorAll('.modal').forEach(function(modal) {
+            modal.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+
+        // 优化购物车功能
+        const cart = [];
+        const cartItemsList = document.getElementById('cart-items-list');
+        const cartFloat = document.getElementById('cart-float');
+        let totalItems = 0; // 购物车中的商品总数
+
+        function addToCart(product) {
+            const existingProduct = cart.find(item => item.name === product.name);
+            if (existingProduct) {
+                existingProduct.quantity = 1; // 如果商品已存在，增加数量
+                console.log(`商品已存在，数量增加到 ${existingProduct.quantity}`);
+            } else {
+                product.quantity = 1; // 如果是新商品，初始化数量
+                cart.push(product);
+                totalItems += 1; // 只有新商品时才增加总商品数量
+                console.log(`新商品添加到购物车：${product.name}`);
+            }
+            updateCartContent();
+        }
+
+        function checkout() {
+            alert('结算成功');
+            closeModal('cart-modal');
+        }
+
+        function updateCartContent() {
+            cartItemsList.innerHTML = '';
+            totalItems = 0; // 重置 totalItems
+            cart.forEach(function(product) {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    ${product.name} - 单价: ${product.price} - 数量: ${product.quantity}
+                    <div class="quantity-control">
+                        <button class="quantity-btn" data-name="${product.name}" data-change="-1">-</button>
+                        <input type="text" value="${product.quantity}" readonly>
+                        <button class="quantity-btn" data-name="${product.name}" data-change="1">+</button>
+                        <button class="remove-btn" data-name="${product.name}">删除</button>
+                    </div>
+                `;
+                cartItemsList.appendChild(li);
+                totalItems += product.quantity; // 累加总商品数量
+            });
+            cartFloat.setAttribute('data-count', totalItems); // 更新购物车红点显示总商品数量
+            console.log(`更新后的总商品数量：${totalItems}`);
+        }
+
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('quantity-btn')) {
+                const productName = event.target.getAttribute('data-name');
+                const change = parseInt(event.target.getAttribute('data-change'));
+                changeQuantity(productName, change);
+            } else if (event.target.classList.contains('remove-btn')) {
+                const productName = event.target.getAttribute('data-name');
+                removeFromCart(productName);
+            } else if (event.target.classList.contains('buy-btn') || event.target.classList.contains('reserve-btn')) {
+                const product = {
+                    name: event.target.parentElement.querySelector('h3').innerText,
+                    price: event.target.parentElement.querySelector('.price').innerText
+                };
+                addToCart(product);
+            }
+        });
+
+        function changeQuantity(productName, change) {
+            const product = cart.find(item => item.name === productName);
+            if (product) {
+                const newQuantity = product.quantity + change;
+                if (newQuantity > 0) {
+                    totalItems += change; // 更新总商品数量
+                    product.quantity = newQuantity;
+                } else {
+                    totalItems -= product.quantity; // 减去被移除商品的数量
+                    cart.splice(cart.indexOf(product), 1);
+                }
+                updateCartContent();
+            }
+        }
+
+        function removeFromCart(productName) {
+            const product = cart.find(item => item.name === productName);
+            if (product) {
+                totalItems -= product.quantity; // 减去被移除商品的数量
+                cart.splice(cart.indexOf(product), 1);
+                updateCartContent();
+            }
+        }
+
+        function toggleCartContent() {
+            const cartContent = document.getElementById('cart-content');
+            cartContent.style.display = cartContent.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // 使购物车悬浮球可拖动并设置边界
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        cartFloat.addEventListener('mousedown', function(e) {
+            isDragging = true;
+            offsetX = e.clientX - cartFloat.getBoundingClientRect().left;
+            offsetY = e.clientY - cartFloat.getBoundingClientRect().top;
+            cartFloat.style.transition = 'none';
+            document.body.style.overflow = 'hidden';
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            if (isDragging) {
+                let newX = e.clientX - offsetX;
+                let newY = e.clientY - offsetY;
+
+                const minX = 0;
+                const minY = 0;
+                const maxX = window.innerWidth - cartFloat.offsetWidth;
+                const maxY = window.innerHeight - cartFloat.offsetHeight;
+
+                if (newX < minX) newX = minX;
+                if (newY < minY) newY = minY;
+                if (newX > maxX) newX = maxX;
+                if (newY > maxY) newY = maxY;
+
+                cartFloat.style.left = `${newX}px`;
+                cartFloat.style.top = `${newY}px`;
+            }
+        });
+
+        document.addEventListener('mouseup', function() {
+            isDragging = false;
+            cartFloat.style.transition = 'background-color 0.3s ease, transform 0.2s ease';
+            document.body.style.overflow = '';
+        });
+
+        // 使购物车悬浮球在手机端可拖动
+        cartFloat.addEventListener('touchstart', function(e) {
+            isDragging = true;
+            offsetX = e.touches[0].clientX - cartFloat.getBoundingClientRect().left;
+            offsetY = e.touches[0].clientY - cartFloat.getBoundingClientRect().top;
+            cartFloat.style.transition = 'none';
+            document.body.style.overflow = 'hidden';
+        });
+
+        document.addEventListener('touchmove', function(e) {
+            if (isDragging) {
+                let newX = e.touches[0].clientX - offsetX;
+                let newY = e.touches[0].clientY - offsetY;
+
+                const minX = 0;
+                const minY = 0;
+                const maxX = window.innerWidth - cartFloat.offsetWidth;
+                const maxY = window.innerHeight - cartFloat.offsetHeight;
+
+                if (newX < minX) newX = minX;
+                if (newY < minY) newY = minY;
+                if (newX > maxX) newX = maxX;
+                if (newY > maxY) newY = maxY;
+
+                cartFloat.style.left = `${newX}px`;
+                cartFloat.style.top = `${newY}px`;
+            }
+        });
+
+        document.addEventListener('touchend', function() {
+            isDragging = false;
+            cartFloat.style.transition = 'background-color 0.3s ease, transform 0.2s ease';
+            document.body.style.overflow = '';
+        });
+
+        // 搜索功能
+        const allProducts = [
+            { name: '古法低钠老盐 | 20年窖藏，三高人群的安心之选', price: '¥19.9', params: '古法低钠老盐，20年窖藏，减钠不减鲜，守护健康。作为国家地理标志产品，它富含天然矿物质，每克含天然锶元素0.12mg，助力心血管健康，是三高人群的日常调味首选。', img: 'https://www.helloimg.com/i/2025/02/14/67aed6c5bb6b1.jpg' },
+            { name: '四阶控盐神器 | 精准掌控咸鲜层次，调出生活好滋味', price: '¥15.9', params: '四阶控盐神器，米其林主厨同款，精准控盐，满足不同烹饪需求。采用独创颗粒分级技术，煎炒炖煮一瓶搞定，无论是家庭厨房还是专业烹饪，都能轻松掌控咸鲜层次。', img: 'https://www.helloimg.com/i/2025/02/14/67aed6c8098a4.jpg' },
+            { name: '海盐冷萃咖啡棒 | 滴滴凝萃咖啡本味，邂逅海风咸香', price: '¥29.9', params: '海盐冷萃咖啡棒，采用冷萃工艺，保留咖啡原香。精选北纬18°天然海盐，与高品质咖啡豆完美融合，带来独特的咸甜口感。作为国际咖啡品鉴协会认证的产品，它是咖啡爱好者的独特选择。', img: 'https://www.helloimg.com/i/2025/02/14/67aed6c88a0de.jpg' },
+            { name: '海洋护齿牙膏 | 天然海盐，重塑口腔微生态。', price: '¥19.9', params: '海洋护齿牙膏，采用天然海盐成分，温和护齿。富含天然锶元素，有效预防龋齿，是口腔健康推荐产品。适合全家使用，为您的口腔健康保驾护航。', img: 'https://www.helloimg.com/i/2025/02/14/67aed6cb72a4b.jpg' },
+            { name: '盐田观光 | 漫步盐田，触晶莹海盐，赏无垠盐池，品海风咸香', price: '¥49.9', params: '盐田观光，漫步盐田，触晶莹海盐，赏无垠盐池，品海风咸香。', img: 'https://www.helloimg.com/i/2025/02/14/67aed6cba9343.jpg' },
+            { name: '制盐体验 | 从海水到盐粒，亲手解锁古老制盐奥秘，收获满满成就感。', price: '¥39.9', params: '制盐体验，从海水到盐粒，亲手解锁古老制盐奥秘，收获满满成就感。', img: 'https://www.helloimg.com/i/2025/02/14/67aed6c294002.jpg' },
+            { name: '盐知识展览 | 穿越盐的历史长河，从起源到发展，一站式尽览。', price: '¥39.9', params: '盐知识展览，穿越盐的历史长河，从起源到发展，一站式尽览。', img: 'https://www.helloimg.com/i/2025/02/14/67aed6c282a16.jpg' },
+            { name: '盐田跳伞 | 高空极速下落，邂逅盐田梦幻景致，挑战心跳极限 。', price: '¥599.9', params: '盐田跳伞，高空极速下落，邂逅盐田梦幻景致，挑战心跳极限。', img: 'https://www.helloimg.com/i/2025/02/14/67aed6c4e1ddc.jpg' }
+        ];
+        let loadedProducts = 2;
+
+        function searchProducts() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const productList = document.getElementById('product-list');
+            productList.innerHTML = '';
+            let found = false;
+
+            allProducts.forEach(function(product) {
+                if (product.name.toLowerCase().includes(query) || product.params.toLowerCase().includes(query)) {
+                    const isTourProduct = product.name.includes('盐田') || product.name.includes('体验') || product.name.includes('展览') || product.name.includes('跳伞');
+                    const productItem = `
+                        <div class="product-item">
+                            <img src="${product.img}" alt="${product.name}">
+                            <h3>${product.name}</h3>
+                            <p class="price">${product.price}</p>
+                            <p class="toggle-details" onclick="showProductDetails(${JSON.stringify(product)})">查看详情</p>
+                            <button class="${isTourProduct ? 'reserve-btn' : 'buy-btn'}" onclick="addToCart({name: '${product.name}', price: '${product.price}'})">${isTourProduct ? '预约' : '添加至购物车'}</button>
+                        </div>
+                    `;
+                    productList.insertAdjacentHTML('beforeend', productItem);
+                    found = true;
+                }
+            });
+
+            if (!found) {
+                showAlert('未找到匹配的产品。您可以尝试搜索其他关键词，如“古法低钠老盐”“四阶控盐神器”“海盐冷萃咖啡棒”“海洋护齿牙膏”等');
+            } else {
+                document.getElementById('load-more-btn').style.display = 'block';
+            }
+        }
+
+        function validateQuantity(input) {
+            if (input.value < 1) {
+                input.value = 1;
+            }
+        }
+
+        // 绑定购买按钮和预约按钮点击事件
+        function bindBuyButtons() {
+            document.querySelector('.product-list').addEventListener('click', function(event) {
+                if (event.target.classList.contains('buy-btn')) {
+                    const product = {
+                        name: event.target.parentElement.querySelector('h3').innerText,
+                        price: event.target.parentElement.querySelector('.price').innerText
+                    };
+                    addToCart(product);
+                } else if (event.target.classList.contains('reserve-btn')) {
+                    const product = {
+                        name: event.target.parentElement.querySelector('h3').innerText,
+                        price: event.target.parentElement.querySelector('.price').innerText
+                    };
+                    addToCart(product);
+                    alert('预约成功');
+                }
+            });
+        }
+        bindBuyButtons();
+
+        // 加载更多产品的功能
+        document.getElementById('load-more-btn').addEventListener('click', function() {
+            const productList = document.getElementById('product-list');
+            productList.innerHTML = '';
+            allProducts.slice(0, 4).forEach(function(product) {
+                const productItem = `
+                    <div class="product-item">
+                        <img src="${product.img}" alt="${product.name}">
+                        <h3>${product.name}</h3>
+                        <p class="price">${product.price}</p>
+                        <p class="toggle-details" onclick="toggleDetails(this)">查看详情</p>
+                        <div class="details">
+                            <p>销量：99+</p>
+                            <p>产品参数：${product.params}</p>
+                        </div>
+                        <button class="buy-btn"><i class="fas fa-cart-plus"></i> 添加至购物车</button>
+                    </div>
+                `;
+                productList.insertAdjacentHTML('beforeend', productItem);
+            });
+            loadedProducts = 4;
+            this.style.display = 'none';
+        });
+
+        function showAlert(message) {
+            alert(message);
+        }
+
+        // 调用 showInputModal() 函数来显示输入弹窗
+        showInputModal();
+
+        // 提交问题
+        function submitQuestion() {
+            const questionInput = document.getElementById('question-input');
+            const question = questionInput.value.trim();
+            if (question) {
+                const answer = getAnswerFromKnowledgeBase(question);
+                addQuestionToList(question, answer);
+                questionInput.value = '';
+            } else {
+                alert('请输入问题');
+            }
+        }
+
+        // 从知识库获取答案（模拟）
+        function getAnswerFromKnowledgeBase(question) {
+            const knowledgeBase = {
+                '营养': '海盐富含矿物质和微量元素，如钾、钙、镁、锌、铁等。',
+                '介绍': '海盐是通过露天盐田日晒的缓慢蒸发方式，使结晶作用发生在盐水表面，结出脆弱的角锥形中空薄片。入口带着矿物质和海水咸鲜味的感觉，回味中还有一丝甘甜。',
+                '用途': '海盐适用于烹饪调味、腌制食品、热敷泡澡等。',
+                '功效': '适量摄入海盐有助于维持人体电解质平衡，促进骨骼健康等。',
+                '种类': '海盐有多种类型，包括粗海盐、精制海盐、加碘海盐、无碘海盐、海精盐，雪花盐等。'
+            };
+            for (const keyword in knowledgeBase) {
+                if (question.includes(keyword)) {
+                    return `${knowledgeBase[keyword]} <a href="#">点击查看《海盐健康白皮书》</a>`;
+                }
+            }
+            return '“小盐正在努力充电中！<a href="#">点击查看《海盐健康白皮书》</a>”';
+        }
+
+        // 添加问答到列表
+        function addQuestionToList(question, answer) {
+            const qaList = document.getElementById('qa-list');
+            const qaItem = document.createElement('div');
+            qaItem.classList.add('qa-item');
+            qaItem.innerHTML = `
+                <p><strong>问：</strong>${question}</p>
+                <p><strong>答：</strong>${answer}</p>
+            `;
+            qaList.appendChild(qaItem);
+        }
+    </script>
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            direction: 'vertical',
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
+</body>
+</html>
